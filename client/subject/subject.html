@@ -1,0 +1,72 @@
+<div class="select-group">
+    <label class="control-label">所属专业：</label>
+    <select ng-model="Add.belongto" ng-options="major for major in Add.majors" >
+    <option value="">请选择</option>
+    </select>
+</div>
+<div class="select-group">
+    <label class="control-label">科目名称：</label>
+    <select ng-model="Add.namesuit" ng-options="name for name in Add.subjectname">
+        <option value="">请选择</option>
+    </select>
+</div>
+
+<button type="button" class="btn btn-default" ng-click="Add.suitSubject()" >确定</button>
+
+<div class="suitable-subject" ng-show="Add.suit"><p >符合要求的科目：</p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>科目编号</th>
+            <th>科目名称</th>
+            <th>科目课时</th>
+            <th>所属专业</th>
+            <th>是否必修</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="subject in Add.scourses">
+            <td>{{subject.number}}</td>
+            <td>{{subject.name}}</td>
+            <td>{{subject.long}}</td>
+            <td>{{subject.major}}</td>
+            <td>{{subject.ifrequired}}</td>
+            <td><label>
+                <input type="radio" name="optionsRadios" value="{{subject._id}}" ng-model="Add.suitsubject">
+            </label></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<form class="form-inline">
+    <div class="form-group">
+        <label class="control-label">班期编号</label>
+        <input type="number" class="form-control" ng-model="Add.snumber"/>
+    </div >
+    <div class="form-group">
+        <lable class="control-label">班期姓名:</lable>
+        <input type="text" class="form-control" ng-model="Add.sname" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">开课专业:</label>
+        <input type="text" class="form-control" ng-model="Add.point"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">授课老师:</label>
+        <select ng-model="Add.teacher" ng-options="teacher.name for teacher in Add.teachers">
+            <option value="">请选择</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <lable class="control-label">有效学期：</lable>
+        <select ng-model="Add.term" ng-options="term for term in Add.terms">
+            <option value="">请选择</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit" ng-click="Add.addSubject()">添加</button>
+    </div>
+</form>

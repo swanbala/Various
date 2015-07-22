@@ -1,0 +1,82 @@
+Search:
+<input type="text" ng-model="query"/>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>班期编号</th>
+        <th>班期名称</th>
+        <th>授课老师</th>
+        <th>开课专业</th>
+        <th>有效学期</th>
+        <!-- th>详细信息</th -->
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in course.items | filter:query">
+        <td>{{item.number}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.teacher}}</td>
+        <td>{{item.point}}</td>
+        <td>{{item.term}}</td>
+        <!-- td>{{item.description}}</td -->
+        <td><a href="" ng-click="course.remove(item.number)"><span class="glyphicon glyphicon-trash">{{item.number}}</span></a></td>
+        <td><a href="" ng-click="course.edit(item)"><span class="glyphicon glyphicon-pencil"></span></a></td>
+    </tr>
+    </tbody>
+</table>
+<!--div ng-if="course.item.name">
+    <button class="btn btn-primary" ng-click="course.edit()">修改</button>
+    <p>{{course.item.name}}</p>
+    <p>{{course.item.subject}}</p>
+    <p>{{course.item.teacher}}</p>
+    <p>{{course.item.starttime |date:'yyyy/mm/dd'}}-{{course.item.endtime |date:'yyyy/MM/dd'}}</p>
+    <p>{{course.item.stat}}</p>
+    <p>{{course.item.description}}</p>
+    <p>{{course.item.details}}</p>
+</div -->
+
+<div class="modal fade" id="courseModal" tabindex="-1" role="dialog" ng-controller="UserController as user">
+    <form ng-submit="course.save(course.number)">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">班期编号</label>
+                        <input type="number" class="form-control" ng-model="course.number"/>
+                    </div>
+                    <div class="form-group">
+                        <label  class="control-label">班期名称</label>
+                        <input type="text" class="form-control" ng-model="course.name"/>
+                    </div>
+                    <div>
+                        <lable class="control-label">授课老师</lable>
+                        <select ng-model="course.teacher" ng-options="item.name for item in course.teachers">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label  class="control-label">开课专业</label>
+                        <textarea type="text" class="form-control" ng-model="course.point"/>
+                    </div>
+                    <div class="form-group">
+                        <lable class="control-label">有效学期</lable>
+                        <input type="text" class="form-control" ng-model="course.term"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="course.cancel()">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>

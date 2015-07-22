@@ -1,0 +1,79 @@
+var getSchedule=function(filter,condition,fn){
+    MongoClient.connect(url,function(err,db){
+        var schedules=db.collection('subjects');
+
+        if(filter=='name') {
+            schedules.find({name: condition}).toArray(function (err, items) {
+                fn(err, items);
+                db.close();
+            });
+        }
+        else if(filter=='number'){
+            schedules.find({number:parseInt(condition)}).toArray(function(err,items){
+                fn(err,items);
+                db.close();
+            });
+        }
+        else if(filter=='teacher'){
+            console.log(typeof condition);
+            schedules.find({teacher:condition}).toArray(function(err,items){
+                fn(err,items);
+                db.close();
+            });
+        }
+        else {
+            schedules.find({term:parseInt(condition)}).toArray((function(err,items){
+                fn(err,items);
+                db.close();
+            }))
+        }
+    })
+
+}
+
+
+index**********************************************************
+
+  function getSchedule(fit){
+        var filter,condition;
+        if(fit=='term'){
+            filter=fit;
+            condition=schedule.term;
+        }
+        else{
+            if(fit=='编号') {
+                filter = 'number';
+            }
+            else if(fit=='名称'){
+                filter='name';
+            }
+            else{
+                filter='teacher';
+            }
+            condition=schedule.condition
+        }
+
+        console.log(filter);
+        $http
+            .get('/schedule',{
+                params: {
+                    filter:filter,
+                    condition:condition
+                }
+            })
+            .success(function(items){
+                schedule.items=items;
+            })
+          .error(function(){
+              console.log('get schedule fails!');
+          })
+
+    };
+
+
+function Arrange 最后加上：
+getSchedule('term');
+
+schdule.js************************************************************
+
+html也要改改
